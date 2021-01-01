@@ -1,4 +1,6 @@
-# vue-movies
+# Vue Movies
+
+> This project uses VueJs 3 and typescript.
 
 ## Project setup
 ```
