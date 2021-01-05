@@ -35,6 +35,7 @@ import FeatureCard from "@/components/FeatureCard.vue";
 import Search from "@/components/Search.vue";
 
 import useMovieApi from "@/hooks/movieApi";
+import { onBeforeMount } from "vue";
 
 export default {
   name: "Home",
@@ -47,11 +48,12 @@ export default {
     const state = useMovieApi();
 
     const handleSearch = (searchTerm: string) => {
-      console.log("handleSearch", searchTerm);
-      console.log("1", state.search);
       state.search = searchTerm;
-      console.log("2", state.search);
     };
+
+    onBeforeMount(() => {
+      state.search = "Batman";
+    });
 
     return {
       state,

@@ -1,28 +1,36 @@
 <template>
   <div>
-    <Loader :loading="loading" msg="Fetching feature details..." />
+    <Loader :loading="state.loading" msg="Fetching feature details..." />
+    {{ state.hasErrors }}
+    <p v-if="state.hasErrors">
+      Ops, fetch failed ;(
+    </p>
 
     <div class="feature-detail">
-      <h2>{{ feature.Title }}</h2>
-      <p>{{ feature.Year }}</p>
-      <img :src="feature.Poster" alt="feature Poster" class="featured-img" />
+      <h2>{{ state.features.Title }}</h2>
+      <p>{{ state.features.Year }}</p>
+      <img
+        :src="state.features.Poster"
+        alt="feature Poster"
+        class="featured-img"
+      />
 
       <div class="feature-numbers">
         <div class="modal-rating">
           <div>
-            <h4>{{ feature.imdbRating }}</h4>
+            <h4>{{ state.features.imdbRating }}</h4>
           </div>
           <p>Rating</p>
         </div>
         <div class="runtime">
           <div>
-            <h4>{{ feature.Runtime }}</h4>
+            <h4>{{ state.features.Runtime }}</h4>
           </div>
           <p>Runtime</p>
         </div>
         <div class="votes">
           <div>
-            <h4>{{ feature.imdbVotes }}</h4>
+            <h4>{{ state.features.imdbVotes }}</h4>
           </div>
           <p>Voters</p>
         </div>
@@ -30,19 +38,18 @@
 
       <br />
 
-      <p>{{ feature.Plot }}</p>
+      <p>{{ state.features.Plot }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import Loader from "@/components/Loading.vue";
+
 import { onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
 
-import useFetch from "@/composables/useFetch";
-import env from "@/env";
-
-import Loader from "@/components/Loading.vue";
+import useMovieApi from "@/hooks/movieApi";
 
 export default {
   components: {
@@ -50,19 +57,14 @@ export default {
   },
   setup() {
     const route = useRoute();
-    const { results: result, loading, hasErrors, execute } = useFetch();
+    const state = useMovieApi();
 
     onBeforeMount(async () => {
-      await execute(
-        `${env.baseApi}/?apikey=${env.apiKey}&i=${route.params.id}&plot=full`
-      );
+      state.movieId = route.params.id;
     });
 
-    console.log(result);
     return {
-      feature: result,
-      loading,
-      hasErrors
+      state
     };
   }
 };
