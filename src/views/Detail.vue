@@ -13,6 +13,8 @@
         :src="state.features.Poster"
         alt="feature Poster"
         class="featured-img"
+        width="100"
+        height="100"
       />
 
       <div class="feature-numbers">

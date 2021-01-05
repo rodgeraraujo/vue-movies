@@ -100,6 +100,12 @@ export default {
       max-width: 50%;
       flex: 1 1 50%;
       padding: 16px 8px;
+      .feature-link {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        text-decoration: none !important;
+      }
     }
   }
 }

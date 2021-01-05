@@ -1,6 +1,8 @@
 <template>
   <form @submit.prevent="handleSearch()" class="search-box">
+    <label for="search">.</label>
     <input
+      id="search"
       type="text"
       :placeholder="placeholder"
       v-model="searchTerm"
@@ -52,7 +54,7 @@ export default {
     &[type="text"] {
       width: 100%;
       color: #fff;
-      background-color: #496583;
+      background-color: #374f62;
       font-size: 20px;
       padding: 10px 16px;
       border-radius: 8px;
@@ -68,7 +70,7 @@ export default {
     &[type="submit"] {
       width: 100%;
       max-width: 300px;
-      background-color: #42b883;
+      background-color: #246048;
       padding: 16px;
       border-radius: 8px;
       color: #fff;
@@ -76,9 +78,13 @@ export default {
       text-transform: uppercase;
       transition: 0.4s;
       &:active {
-        background-color: #3b8070;
+        background-color: #1d4e3a;
       }
     }
+  }
+  label {
+    position: relative;
+    color: transparent;
   }
 }
 </style>
