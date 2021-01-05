@@ -16,7 +16,6 @@ export default function useMovieApi() {
 
   const callback = () => {
     console.log("callback");
-    console.log("search " + state.search, "movieId " + state.movieId);
   };
 
   watch(async () => {
