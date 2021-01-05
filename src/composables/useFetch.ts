@@ -12,8 +12,6 @@ export default function useFetch() {
       const response = await fetch(url);
       const data = await response.json();
 
-      console.log(data);
-
       results.value = data;
     } catch (err) {
       hasErrors.value = err;
